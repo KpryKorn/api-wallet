@@ -10,6 +10,7 @@
 import router from '@adonisjs/core/services/router'
 import TodosController from '#controllers/todos_controller'
 import { middleware } from './kernel.js'
+import SessionController from '../app/controllers/session_controller.js'
 
 router.get('/', async () => {
   return {
@@ -19,6 +20,8 @@ router.get('/', async () => {
 
 router
   .group(() => {
+    router.post('/login', [SessionController, 'store'])
+
     router
       .group(() => {
         router.get('/todos', [TodosController, 'index'])
